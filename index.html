@@ -263,7 +263,7 @@
       position: relative; aspect-ratio: 16 / 9;
       width: min(100%, calc((100vh - 150px) * 16 / 9));
       width: min(100%, calc((100dvh - 150px) * 16 / 9));
-      perspective: 380cqw; touch-action: pan-y; /* gentle depth that scales with the viewer width */
+      perspective: 380cqw; touch-action: none; /* gentle depth that scales with the viewer width */
     }
     .fb-sheet { position: absolute; inset: 0; background: #EEEADF; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4); }
     .fb-sheet img { display: block; width: 100%; height: 100%; user-select: none; -webkit-user-drag: none; }
@@ -640,12 +640,23 @@
 
     // swipe to turn
     var sx = 0, sy = 0;
-    stage.addEventListener('pointerdown', function (e) { sx = e.clientX; sy = e.clientY; });
-    stage.addEventListener('pointerup', function (e) {
-      var dx = e.clientX - sx, dy = e.clientY - sy;
+    // touch-action is none on the stage: with pan-y, Android Chrome claims a slightly diagonal swipe (or any swipe along the
+    // screen's vertical axis once the viewer is turned on its side) and fires pointercancel, so no pointerup ever arrived.
+    // Cancel is handled too, using the last known position, as a safety net.
+    var lx = 0, ly = 0, tracking = false;
+    function endSwipe() {
+      if (!tracking) return; tracking = false;
+      var dx = lx - sx, dy = ly - sy;
       if (dlg.classList.contains('fb--rot')) { var t = dx; dx = dy; dy = -t; }   // viewer is turned a quarter turn: map screen axes back
-      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? cur + 1 : cur - 1);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) go(dx < 0 ? cur + 1 : cur - 1);
+    }
+    stage.addEventListener('pointerdown', function (e) {
+      if (!e.isPrimary) return;
+      sx = lx = e.clientX; sy = ly = e.clientY; tracking = true;
     });
+    stage.addEventListener('pointermove', function (e) { if (tracking && e.isPrimary) { lx = e.clientX; ly = e.clientY; } });
+    stage.addEventListener('pointerup', function (e) { if (e.isPrimary) { lx = e.clientX; ly = e.clientY; endSwipe(); } });
+    stage.addEventListener('pointercancel', endSwipe);
 
     // Delegated in the capture phase so nothing else gets to treat these as ordinary links
     document.addEventListener('click', function (e) {
