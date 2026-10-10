@@ -315,6 +315,22 @@
       .fb-hint { display: block; }
     }
 
+    /* Phone held upright: turn the viewer onto its side so pages fill the screen like landscape (toggled by script).
+       The dialog is laid out as a landscape box (width = screen height) and rotated a quarter turn about its top-left corner. */
+    .fb.fb--rot {
+      position: fixed; inset: auto; top: 0; left: 100%;
+      width: 100vh; width: 100dvh; height: 100vw; height: 100dvw;
+      transform-origin: top left; transform: rotate(90deg);
+    }
+    .fb.fb--rot .fb-title span, .fb.fb--rot .fb-count span { display: inline; }
+    .fb.fb--rot .fb-hint { display: none; }
+    .fb.fb--rot .fb-bar { padding-top: 8px; padding-bottom: 4px; }
+    .fb.fb--rot .fb-nav { padding-top: 4px; padding-bottom: 10px; }
+    .fb.fb--rot .fb-stage {
+      width: min(100%, calc((100vw - 110px) * 16 / 9));
+      width: min(100%, calc((100dvw - 110px) * 16 / 9));
+    }
+
     a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
 
     /* ── Contact ──────────────────────────────────── */
@@ -565,6 +581,11 @@
     prevBtn.addEventListener('click', function () { go(cur - 1); });
     nextBtn.addEventListener('click', function () { go(cur + 1); });
 
+    // Upright phone: lay the viewer on its side automatically (a real rotation to landscape switches it back off).
+    var upright = window.matchMedia('(pointer: coarse) and (orientation: portrait) and (max-width: 700px)');
+    function syncOrientation() { dlg.classList.toggle('fb--rot', upright.matches); }
+    if (upright.addEventListener) upright.addEventListener('change', syncOrientation); else upright.addListener(syncOrientation);
+
     function openBook(from, k) {
       if (!BOOKS[k]) return;
       key = k; PAGES = BOOKS[k].pages; busy = false;
@@ -573,7 +594,7 @@
       dlg.setAttribute('aria-label', BOOKS[k].label);
       totalEl.textContent = pad(PAGES.length); buildDots();
       document.documentElement.style.overflow = 'hidden';
-      show(0);
+      show(0); syncOrientation();
       if (!dlg.open) {
         try { dlg.showModal(); } catch (err) { dlg.setAttribute('open', ''); }
       }
@@ -622,6 +643,7 @@
     stage.addEventListener('pointerdown', function (e) { sx = e.clientX; sy = e.clientY; });
     stage.addEventListener('pointerup', function (e) {
       var dx = e.clientX - sx, dy = e.clientY - sy;
+      if (dlg.classList.contains('fb--rot')) { var t = dx; dx = dy; dy = -t; }   // viewer is turned a quarter turn: map screen axes back
       if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? cur + 1 : cur - 1);
     });
 
