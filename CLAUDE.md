@@ -11,7 +11,7 @@ He is a designer, so visual details matter. Keep copy casual-professional, warm,
 
 ## Run it
     python3 -m http.server 8000     # then open http://localhost:8000
-or just open `index.html` in a browser. Inter loads from Google Fonts (fallback: Helvetica Neue).
+or just open `index.html` in a browser. PP Neue Montreal is self-hosted from `assets/` (fallback: Helvetica Neue).
 
 ## Files
 - `index.html`        all markup + CSS (inline, no JS needed)
@@ -33,7 +33,7 @@ or just open `index.html` in a browser. Inter loads from Google Fonts (fallback:
     Visiting `index.html#case-study` opens the flipbook on load. (Old Drive URL, now unused:
     https://drive.google.com/file/d/1niZ-RM92YBTyM1elVjxVlBRXOak-WtKt/view?usp=sharing)
   - Email: mailto:hello@joshuaballer.com  ·  Site: https://joshuaballer.com
-- Palette: bg #F5F5F2, ink #202020, secondary #70706C, rules #DDDDD7. Inter / Helvetica Neue.
+- Palette: bg #F5F5F2, ink #202020, secondary #70706C, rules #DDDDD7. PP Neue Montreal / Helvetica Neue.
   Neutral editorial look: no gradients, decorative shapes, device mockups, heavy shadows or card chrome.
   The artwork supplies the colour.
 - No unsupported claims (achievements, metrics, credentials). Presentation and campaign work are
