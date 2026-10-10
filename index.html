@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joshua Baller — Selected Portfolios 2026</title>
+  <meta name="description" content="Joshua Baller is a multidisciplinary designer in Metro Manila with 6+ years of experience in brand identity, web and product design, and marketing communication. Three portfolios: branding, presentation design, and a social media campaign.">
+  <meta name="theme-color" content="#F5F5F2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Palette (from the brief) */
+      --bg: #F5F5F2;
+      --ink: #202020;
+      --muted: #70706C;
+      --rule: #DDDDD7;
+      --tile-bed: #EAEAE5;
+
+      /* Colours sampled from the supplied artwork, used only to seat contained images */
+      --storyboard-cream: #F4F0E7;
+      --launch-blue: #2457FF;
+
+      --font: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+      /* Fluid scale: matches the 1920 x 1080 PDF at 1920px wide */
+      --margin: clamp(20px, 4.7vw, 90px);
+      --col-gap: clamp(16px, 1.67vw, 32px);
+      --tile-gap: 8px;
+
+      --t-name: clamp(1.125rem, 1.56vw, 1.9rem);
+      --t-meta: clamp(1rem, 1.25vw, 1.5rem);
+      --t-h1: clamp(2.25rem, 3.55vw, 4.25rem);
+      --t-lede: clamp(1.0625rem, 1.4vw, 1.7rem);
+      --t-title: clamp(1.4rem, 1.67vw, 2rem);
+      --t-body: clamp(1rem, 1.3vw, 1.55rem);
+      --t-foot: clamp(1rem, 1.15vw, 1.4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+    p, h1, h2, figure { margin: 0; }
+    img { display: block; }
+
+    .page {
+      min-height: 100svh;
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: clamp(24px, 3.3vw, 64px) var(--margin) clamp(18px, 1.9vw, 36px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Introduction ─────────────────────────────── */
+    .intro-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .name { font-size: var(--t-name); font-weight: 600; }
+    .meta { text-align: right; }
+    .meta-title { font-size: var(--t-meta); font-weight: 500; }
+    .meta-loc { font-size: calc(var(--t-meta) * 0.92); color: var(--muted); margin-top: 0.15em; }
+
+    h1 {
+      font-size: var(--t-h1);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-top: clamp(8px, 1vw, 20px);
+      text-wrap: balance;
+    }
+    .lede {
+      font-size: var(--t-lede);
+      line-height: 1.4;
+      color: var(--muted);
+      max-width: 36em;
+      margin-top: clamp(10px, 1vw, 20px);
+    }
+
+    /* ── Portfolio cards ──────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--col-gap);
+      margin-top: clamp(28px, 2.6vw, 50px);
+    }
+    .card { display: flex; flex-direction: column; min-width: 0; }
+
+    /* Thumbnail frame: tiles are laid out inside, and the whole frame is one link */
+    .thumb {
+      display: grid;
+      gap: var(--tile-gap);
+      aspect-ratio: 558.67 / 317.7;
+    }
+
+    .tile {
+      position: relative;
+      overflow: hidden;
+      background: var(--tile-bed);
+      min-width: 0;
+      min-height: 0;
+    }
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 500ms cubic-bezier(.2, .7, .2, 1);
+    }
+    .tile figcaption {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      padding: 4px 9px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--ink);
+      background: rgba(245, 245, 242, 0.94);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 220ms ease, transform 220ms ease;
+      pointer-events: none;
+    }
+    .tile:hover img { transform: scale(1.045); }
+    .tile:hover figcaption { opacity: 1; transform: none; }
+
+    /* Layout 1: branding. One dominant image and two supporting crops. */
+    .thumb--branding {
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    .thumb--branding .tile:first-child { grid-row: 1 / span 2; }
+
+    /* Layout 2: presentations. Four covers, each at its own 16:9. */
+    .thumb--presentation {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    /* Layout 3: campaign. 4:5 launch post, 16:9 promo, 1:1 frame, nothing cropped. */
+    .thumb--campaign { grid-template-columns: 45.49% minmax(0, 1fr); } /* launch post stays exactly 4:5 at any width */
+    .thumb--campaign .tile--launch { background: var(--launch-blue); }
+    .thumb--campaign .tile--launch img { object-fit: contain; }
+    .campaign-stack { display: flex; flex-direction: column; gap: var(--tile-gap); min-width: 0; min-height: 0; }
+    .campaign-stack .tile--promo { aspect-ratio: 16 / 9; flex: none; }
+    .campaign-stack .tile--board { flex: 1 1 0; background: var(--storyboard-cream); }
+    .campaign-stack .tile--board img { object-fit: contain; }
+
+    .card h2 {
+      font-size: var(--t-title);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-top: clamp(16px, 1.5vw, 28px);
+    }
+    .card p {
+      font-size: var(--t-body);
+      line-height: 1.45;
+      color: var(--muted);
+      margin-top: 0.5em;
+      max-width: 30em;
+    }
+    .more {
+      align-self: flex-start;
+      margin-top: clamp(12px, 1.2vw, 24px);
+      padding: 4px 0;
+      font-size: var(--t-body);
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    /* Underline: a thin line is always there; a thicker one draws in from the left on hover */
+    .more .label {
+      padding-bottom: 0.2em;
+      background-image: linear-gradient(currentColor, currentColor), linear-gradient(currentColor, currentColor);
+      background-repeat: no-repeat;
+      background-position: 0 100%, 0 100%;
+      background-size: 100% 1.5px, 0% 3px;
+      transition: background-size 420ms cubic-bezier(.2, .7, .2, 1);
+    }
+    .more .arrow {
+      display: inline-block;
+      margin-left: 0.1em;
+      transition: transform 320ms cubic-bezier(.2, .7, .2, 1);
+    }
+    /* Triggers on the link, the keyboard, and the card's thumbnail so they feel connected */
+    .card:hover .more .label,
+    .more:hover .label,
+    .more:focus-visible .label { background-size: 100% 1.5px, 100% 3px; }
+    .card:hover .more .arrow,
+    .more:hover .arrow,
+    .more:focus-visible .arrow { transform: translate(0.2em, -0.2em); }
+    .more:active .arrow { transform: translate(0.32em, -0.32em) scale(1.1); transition-duration: 120ms; }
+
+
+    /* ── One brief load moment: content settles in top to bottom, about 1s in total ── */
+    @keyframes settle {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .intro-top, h1, .lede, .card .thumb, .card h2, .card p, .card .more, .contact {
+      animation: settle 650ms cubic-bezier(.2, .7, .2, 1) both;
+      animation-delay: var(--d, 0ms);
+    }
+    h1 { --d: 70ms; }
+    .lede { --d: 140ms; }
+    .card .thumb { --d: calc(240ms + var(--i, 0) * 80ms); }
+    .card h2 { --d: calc(380ms + var(--i, 0) * 80ms); }
+    .card p { --d: calc(430ms + var(--i, 0) * 80ms); }
+    .card .more { --d: calc(480ms + var(--i, 0) * 80ms); }
+    .card:nth-child(2) { --i: 1; }
+    .card:nth-child(3) { --i: 2; }
+    .contact { --d: 700ms; }
+
+
+    /* ── Flipbook viewer (campaign case study) ───────────────── */
+    .fb {
+      border: 0; padding: 0; margin: 0;
+      width: 100vw; height: 100vh; height: 100dvh;
+      max-width: none; max-height: none;
+      background: #161614; color: #F2F2EE;
+      font-family: var(--font); overflow: hidden;
+    }
+    .fb[open] { display: flex; flex-direction: column; animation: fb-in 220ms ease both; }
+    .fb::backdrop { background: #161614; }
+    @keyframes fb-in { from { opacity: 0; } to { opacity: 1; } }
+
+    .fb-bar {
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+      padding: max(14px, env(safe-area-inset-top, 0px)) clamp(16px, 3vw, 40px) 10px;
+    }
+    .fb-title { margin: 0; font-size: 0.9375rem; }
+    .fb-title b { font-weight: 600; }
+    .fb-title span { margin-left: 0.6em; font-weight: 400; color: #A3A39E; }
+    .fb-count { margin: 0; font-size: 0.9375rem; font-weight: 500; text-align: center; font-variant-numeric: tabular-nums; }
+    .fb-count span { color: #A3A39E; font-weight: 400; margin-left: 0.6em; }
+    .fb-close {
+      justify-self: end; padding: 8px 16px; font: inherit; font-size: 0.875rem; font-weight: 500;
+      color: inherit; background: transparent; border: 1px solid rgba(242, 242, 238, 0.4);
+      border-radius: 999px; cursor: pointer; transition: background 150ms ease;
+    }
+    .fb-close:hover { background: rgba(242, 242, 238, 0.12); }
+
+    .fb-stage-wrap {
+      flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+      padding: 0 clamp(12px, 3vw, 40px);
+      container-type: inline-size;
+    }
+    .fb-stage {
+      position: relative; aspect-ratio: 16 / 9;
+      width: min(100%, calc((100vh - 150px) * 16 / 9));
+      width: min(100%, calc((100dvh - 150px) * 16 / 9));
+      perspective: 380cqw; touch-action: pan-y; /* gentle depth that scales with the viewer width */
+    }
+    .fb-sheet { position: absolute; inset: 0; background: #EEEADF; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4); }
+    .fb-sheet img { display: block; width: 100%; height: 100%; user-select: none; -webkit-user-drag: none; }
+    .fb-leaf { z-index: 3; transform-origin: left center; backface-visibility: hidden; will-change: transform; }
+    .fb-leaf[hidden] { display: none; }
+    .fb-shadow {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0) 70%);
+    }
+    .fb-links { position: absolute; inset: 0; }
+    .fb-links a { position: absolute; display: block; border-radius: 3px; }
+    .fb-links a::after { content: ""; position: absolute; inset: -6px; }
+    .fb-links a:hover { background: rgba(36, 87, 255, 0.12); }
+    .fb-links a:focus-visible { outline: 2px solid #2457FF; outline-offset: 2px; }
+
+
+    .fb-tip {
+      position: absolute; left: 50%; bottom: 84px; z-index: 5; margin: 0; padding: 7px 14px;
+      font-size: 0.8125rem; color: #F2F2EE; background: rgba(36, 36, 33, 0.92);
+      border: 1px solid rgba(242, 242, 238, 0.25); border-radius: 999px; white-space: nowrap;
+      transform: translateX(-50%); opacity: 0; pointer-events: none; transition: opacity 400ms ease;
+    }
+    .fb-tip.on { opacity: 1; }
+    @media (hover: none), (pointer: coarse) { .fb-tip { display: none; } }
+    .fb-hint { display: none; margin: 8px 0 0; text-align: center; font-size: 0.8125rem; color: #A3A39E; }
+    .fb-nav {
+      display: flex; align-items: center; gap: clamp(10px, 2vw, 24px);
+      padding: 10px clamp(16px, 3vw, 40px) max(16px, env(safe-area-inset-bottom, 0px));
+    }
+    .fb-arrow {
+      flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0;
+      color: inherit; background: transparent; border: 1px solid rgba(242, 242, 238, 0.4);
+      border-radius: 50%; cursor: pointer; transition: background 150ms ease;
+    }
+    .fb-arrow:hover:not(:disabled) { background: rgba(242, 242, 238, 0.12); }
+    .fb-arrow:disabled { opacity: 0.3; cursor: default; }
+    .fb-dots { flex: 1; display: flex; gap: 4px; }
+    .fb-dots button {
+      flex: 1; height: 22px; padding: 9px 0; border: 0; cursor: pointer;
+      background: rgba(242, 242, 238, 0.28); background-clip: content-box; transition: background-color 150ms ease;
+    }
+    .fb-dots button:hover { background-color: rgba(242, 242, 238, 0.6); }
+    .fb-dots button[aria-current="true"] { background-color: #F2F2EE; }
+    .fb button:focus-visible { outline: 2px solid #F2F2EE; outline-offset: 3px; }
+
+    @media (max-width: 700px) and (orientation: portrait) {
+      .fb-title span { display: none; }
+      .fb-count span { display: none; }
+      .fb-hint { display: block; }
+    }
+
+    a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+    /* ── Contact ──────────────────────────────────── */
+    .contact {
+      margin-top: auto;
+      padding-top: clamp(24px, 1.8vw, 34px);
+    }
+    .contact-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(12px, 1.1vw, 22px);
+    }
+    .contact a {
+      font-size: var(--t-foot);
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.3em;
+      padding: 6px 0;
+    }
+    .contact a:hover { text-decoration-thickness: 2px; }
+
+    /* ── Tablet and mobile ────────────────────────── */
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 8vw, 56px); }
+      .card p { max-width: 36em; }
+      .intro-top { flex-direction: column; gap: 4px; }
+      .meta { text-align: left; }
+      h1 { margin-top: 18px; }
+    }
+    @media (max-width: 480px) {
+      .contact-inner { flex-direction: column; gap: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile img, .tile figcaption, .more .label, .more .arrow { transition: none; }
+      .intro-top, h1, .lede, .card .thumb, .card h2, .card p, .card .more, .contact { animation: none; }
+      .fb[open] { animation: none; }
+      .tile:hover img { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="intro">
+      <div class="intro-top">
+        <p class="name">Joshua Baller</p>
+        <div class="meta">
+          <p class="meta-title">Selected Portfolios · 2026</p>
+          <p class="meta-loc">Metro Manila, Philippines</p>
+        </div>
+      </div>
+      <h1>Brand, Presentation &amp; Campaign Design</h1>
+      <p class="lede">Multidisciplinary designer with 6+ years of experience in brand identity, web and product design, and marketing communication.</p>
+    </header>
+
+    <main class="cards">
+
+      <!-- Branding -->
+      <article class="card">
+        <div class="thumb thumb--branding">
+          <figure class="tile">
+            <img src="assets/branding-crosby.jpg" width="960" height="540" alt="Crosby brand application: a canvas tote bag with the red Crosby wordmark on a white metal chair" loading="eager">
+            <figcaption>Crosby</figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="assets/branding-renumerate.jpg" width="560" height="393" alt="Renumerate poster mockup in a subway station: Keep the right customers for the right reasons" loading="lazy">
+            <figcaption>Renumerate</figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="assets/branding-revin.jpg" width="960" height="540" alt="Revin brand banner on a city building: AI for the built world" loading="lazy">
+            <figcaption>Revin</figcaption>
+          </figure>
+        </div>
+        <h2>Branding Projects</h2>
+        <p>Brand identities, visual systems, and web applications for startups across technology, healthcare, and SaaS.</p>
+        <a class="more" data-flipbook="branding" aria-haspopup="dialog" href="#branding" target="_blank" rel="noopener noreferrer"><span class="label">View branding portfolio</span> <span class="arrow" aria-hidden="true">↗</span></a>
+      </article>
+
+      <!-- Presentations -->
+      <article class="card">
+        <div class="thumb thumb--presentation">
+          <figure class="tile">
+            <img src="assets/presentation-relay.jpg" width="1000" height="562" alt="Relay investor pitch deck cover, black with a blue gradient panel" loading="eager">
+            <figcaption>Relay · Investor pitch</figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="assets/presentation-signal.jpg" width="1000" height="562" alt="Signal Q3 2026 business review cover, dark green with lime accents" loading="eager">
+            <figcaption>Signal · Business review</figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="assets/presentation-briefly.jpg" width="1000" height="562" alt="Briefly product launch cover, soft teal gradient bands" loading="lazy">
+            <figcaption>Briefly · Product launch</figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="assets/presentation-forma.jpg" width="1000" height="562" alt="Forma 2026 marketing strategy cover, black and white editorial layout" loading="lazy">
+            <figcaption>Forma · Marketing strategy</figcaption>
+          </figure>
+        </div>
+        <h2>Presentation Designs</h2>
+        <p>Four concepts covering investor pitches, business reviews, product launches, and marketing strategy.</p>
+        <a class="more" data-flipbook="presentation" aria-haspopup="dialog" href="#presentations" target="_blank" rel="noopener noreferrer"><span class="label">View presentation portfolio</span> <span class="arrow" aria-hidden="true">↗</span></a>
+      </article>
+
+      <!-- Social media campaign -->
+      <article class="card">
+        <div class="thumb thumb--campaign">
+          <figure class="tile tile--launch">
+            <img src="assets/campaign-launch.jpg" width="820" height="1025" alt="Brand Momentum Week launch feed post: free live webinar, November 16 to 20, hosted by Maya Santos" loading="eager">
+            <figcaption>Launch feed post</figcaption>
+          </figure>
+          <div class="campaign-stack">
+            <figure class="tile tile--promo">
+              <img src="assets/campaign-promo.jpg" width="960" height="540" alt="Promotional thumbnail: Build a brand people remember, with host Maya Santos" loading="lazy">
+              <figcaption>Promo thumbnail</figcaption>
+            </figure>
+            <figure class="tile tile--board">
+              <img src="assets/campaign-storyboard.jpg" width="720" height="720" alt="Animated post frame: four blue squares and one orange square above the word Consistent" loading="lazy">
+              <figcaption>Animated-post frame</figcaption>
+            </figure>
+          </div>
+        </div>
+        <h2>Social Media Campaign</h2>
+        <p>A unified campaign concept spanning feed posts, carousels, educational content, Stories, and motion.</p>
+        <a class="more" data-flipbook="case-study" aria-haspopup="dialog" href="#case-study" target="_blank" rel="noopener noreferrer"><span class="label">View campaign case study</span> <span class="arrow" aria-hidden="true">↗</span></a>
+      </article>
+
+    </main>
+
+    <footer class="contact">
+      <div class="contact-inner">
+        <a href="mailto:hello@joshuaballer.com">hello@joshuaballer.com</a>
+        <a href="https://joshuaballer.com" target="_blank" rel="noopener noreferrer">joshuaballer.com</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <dialog class="fb" id="flipbook" aria-label="Portfolio viewer">
+    <div class="fb-bar">
+      <p class="fb-title"><b id="fb-title-main">Brand Momentum Week</b> <span id="fb-title-sub">Portfolio case study</span></p>
+      <p class="fb-count" aria-live="polite"><b id="fb-num" style="font-weight:500">01</b> / <b id="fb-total" style="font-weight:500">15</b><span id="fb-section"></span></p>
+      <button class="fb-close" type="button" id="fb-close">Close</button>
+    </div>
+    <div class="fb-stage-wrap" id="fb-wrap">
+      <div class="fb-stage" id="fb-stage">
+        <div class="fb-sheet" id="fb-under"><img id="fb-under-img" alt="" decoding="async"><div class="fb-links" id="fb-links"></div></div>
+        <div class="fb-shadow" id="fb-shadow"></div>
+        <div class="fb-sheet fb-leaf" id="fb-leaf" hidden aria-hidden="true"><img id="fb-leaf-img" alt="" decoding="async"></div>
+      </div>
+    </div>
+    <p class="fb-tip" id="fb-tip" aria-hidden="true">Scroll or use the arrow keys to turn pages</p>
+    <p class="fb-hint">Rotate your phone for a larger view</p>
+    <nav class="fb-nav" aria-label="Case study pages">
+      <button class="fb-arrow" type="button" id="fb-prev" aria-label="Previous page"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M11 3.5 5.5 9l5.5 5.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="fb-dots" id="fb-dots" role="group" aria-label="Jump to page"></div>
+      <button class="fb-arrow" type="button" id="fb-next" aria-label="Next page"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m7 3.5 5.5 5.5L7 14.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </nav>
+  </dialog>
+
+  <script>
+  (function () {
+    var BOOKS = {"case-study": {"title": "Brand Momentum Week", "sub": "Portfolio case study", "label": "Brand Momentum Week, portfolio case study", "pages": [{"src": "assets/case-study/page-01.webp", "title": "Cover", "links": []}, {"src": "assets/case-study/page-02.webp", "title": "Campaign overview", "links": []}, {"src": "assets/case-study/page-03.webp", "title": "Audience and objective", "links": []}, {"src": "assets/case-study/page-04.webp", "title": "Creative inspiration", "links": [{"x": 40.0, "y": 62.813, "w": 11.101, "h": 2.685, "href": "https://config.figma.com/", "label": "Visit the website"}, {"x": 68.333, "y": 62.813, "w": 11.101, "h": 2.685, "href": "https://www.uxplus.ai/", "label": "Visit the website"}]}, {"src": "assets/case-study/page-05.webp", "title": "Creative approach", "links": []}, {"src": "assets/case-study/page-06.webp", "title": "Campaign visual system", "links": []}, {"src": "assets/case-study/page-07.webp", "title": "Feed posts", "links": [{"x": 5.0, "y": 86.704, "w": 21.786, "h": 2.685, "href": "https://drive.google.com/drive/folders/13nsJuYCIoKK_90Nesf8J6Z5Et3gP8Y2w?usp=sharing", "label": "View the full-resolution feed posts"}]}, {"src": "assets/case-study/page-08.webp", "title": "Educational carousel", "links": [{"x": 69.914, "y": 15.0, "w": 25.086, "h": 2.685, "href": "https://drive.google.com/drive/folders/1tpJRnT3QI7sSL_eFmZ_aAL6EVjrDJg07?usp=sharing", "label": "View the complete seven-slide carousel"}]}, {"src": "assets/case-study/page-09.webp", "title": "Educational infographic", "links": [{"x": 5.0, "y": 86.704, "w": 22.268, "h": 2.685, "href": "https://drive.google.com/file/d/1yrQ9aikup0sb6ILv-odCRyu5Rs4Pot-x/view?usp=sharing", "label": "View the full-resolution infographic"}]}, {"src": "assets/case-study/page-10.webp", "title": "Promotional thumbnail", "links": [{"x": 5.0, "y": 86.704, "w": 21.388, "h": 2.685, "href": "https://drive.google.com/file/d/1MuVtr9Cs17nX-Im26FLwvNKCVHXb2JPH/view?usp=sharing", "label": "View the full-resolution thumbnail"}]}, {"src": "assets/case-study/page-11.webp", "title": "Instagram Story", "links": [{"x": 5.0, "y": 86.704, "w": 24.993, "h": 2.685, "href": "https://drive.google.com/file/d/1I5VStE7S-LWOxAi-Gb1mYXXSPFjKcutD/view?usp=sharing", "label": "View the full-resolution Instagram Story"}]}, {"src": "assets/case-study/page-12.webp", "title": "Animated post", "links": [{"x": 5.0, "y": 86.704, "w": 21.977, "h": 2.685, "href": "https://drive.google.com/file/d/1bCwyWKVVD4ZtHiEiyG53d72YTxcpiqMi/view?usp=sharing", "label": "Watch the complete animated post"}]}, {"src": "assets/case-study/page-13.webp", "title": "One idea, multiple touchpoints", "links": []}, {"src": "assets/case-study/page-14.webp", "title": "Design outcome", "links": []}, {"src": "assets/case-study/page-15.webp", "title": "Role and process", "links": []}]}, "presentation": {"title": "Presentation Design", "sub": "Selected concepts", "label": "Presentation Design, selected concepts", "pages": [{"src": "assets/presentation/page-01.webp", "title": "Overview", "links": []}, {"src": "assets/presentation/page-02.webp", "title": "Relay: investor pitch deck", "links": []}, {"src": "assets/presentation/page-03.webp", "title": "Relay: selected slides", "links": [{"x": 4.167, "y": 76.852, "w": 14.236, "h": 2.685, "href": "https://drive.google.com/file/d/1J3TRF9e_2lsXg-Kc-GFhkn3THjXr35Yf/view?usp=drive_link", "label": "View the full Relay presentation"}]}, {"src": "assets/presentation/page-04.webp", "title": "Signal: quarterly business review", "links": []}, {"src": "assets/presentation/page-05.webp", "title": "Signal: selected slides", "links": [{"x": 4.167, "y": 76.852, "w": 14.236, "h": 2.685, "href": "https://drive.google.com/file/d/15hAbozRfz756k4YnSmZNJkUB30ZyR-lS/view?usp=drive_link", "label": "View the full Signal presentation"}]}, {"src": "assets/presentation/page-06.webp", "title": "Briefly: product launch and sales", "links": []}, {"src": "assets/presentation/page-07.webp", "title": "Briefly: selected slides", "links": [{"x": 4.167, "y": 73.611, "w": 14.236, "h": 2.685, "href": "https://drive.google.com/file/d/18QlUNOqBULLQdQ_ZvHxzOv5o9KJzbsvK/view?usp=drive_link", "label": "View the full Briefly presentation"}]}, {"src": "assets/presentation/page-08.webp", "title": "Forma: marketing strategy", "links": []}, {"src": "assets/presentation/page-09.webp", "title": "Forma: selected slides", "links": [{"x": 4.167, "y": 73.611, "w": 14.236, "h": 2.685, "href": "https://drive.google.com/file/d/1q0B9EkFi6osEGY1CblA2UyVTST5oO1Ds/view?usp=drive_link", "label": "View the full Forma presentation"}]}]}, "branding": {"title": "Branding Projects", "sub": "Selected work 2025 to 2026", "label": "Branding Projects, selected work 2025 to 2026", "pages": [{"src": "assets/branding/page-01.webp", "title": "Cover", "links": []}, {"src": "assets/branding/page-02.webp", "title": "Index", "links": [{"x": 51.042, "y": 64.907, "w": 13.542, "h": 16.481, "page": 18, "label": "Go to page 18: Contact"}, {"x": 35.417, "y": 64.907, "w": 13.542, "h": 16.481, "page": 17, "label": "Go to page 17: Revin"}, {"x": 19.792, "y": 64.907, "w": 13.542, "h": 16.481, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 64.907, "w": 13.542, "h": 16.481, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 82.292, "y": 17.685, "w": 13.542, "h": 16.481, "page": 8, "label": "Go to page 8: Conway"}, {"x": 66.667, "y": 17.685, "w": 13.542, "h": 18.333, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 51.042, "y": 17.685, "w": 13.542, "h": 16.481, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 35.417, "y": 17.685, "w": 13.542, "h": 16.481, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 17.685, "w": 13.542, "h": 16.481, "page": 3, "label": "Go to page 3: About"}, {"x": 82.292, "y": 41.296, "w": 13.542, "h": 16.481, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 66.667, "y": 41.296, "w": 13.542, "h": 16.481, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 51.042, "y": 41.296, "w": 13.542, "h": 16.481, "page": 12, "label": "Go to page 12: Avera"}, {"x": 35.417, "y": 41.296, "w": 13.542, "h": 16.481, "page": 11, "label": "Go to page 11: Henry"}, {"x": 19.792, "y": 41.296, "w": 13.542, "h": 16.481, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 41.296, "w": 13.542, "h": 16.481, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 19.792, "y": 17.685, "w": 13.542, "h": 16.481, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-03.webp", "title": "About", "links": [{"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-04.webp", "title": "Psychecare", "links": [{"x": 87.11, "y": 7.238, "w": 8.724, "h": 2.782, "href": "https://www.psychecare.org/", "label": "Visit psychecare.org"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}]}, {"src": "assets/branding/page-05.webp", "title": "Different Health", "links": [{"x": 84.691, "y": 7.238, "w": 11.143, "h": 2.782, "href": "https://www.differenthealth.com/", "label": "Visit differenthealth.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-06.webp", "title": "Crosby", "links": [{"x": 90.842, "y": 7.238, "w": 4.992, "h": 2.782, "href": "https://crosby.ai/", "label": "Visit crosby.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-07.webp", "title": "Autopilot", "links": [{"x": 85.966, "y": 7.238, "w": 9.867, "h": 2.782, "href": "https://www.joinautopilot.com/", "label": "Visit joinautopilot.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-08.webp", "title": "Conway", "links": [{"x": 90.365, "y": 7.238, "w": 5.521, "h": 2.782, "href": "https://conway.ai/", "label": "Visit conway.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-09.webp", "title": "Renumerate", "links": [{"x": 86.507, "y": 7.238, "w": 9.379, "h": 2.782, "href": "https://renumerate.com/", "label": "Visit renumerate.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-10.webp", "title": "Peak Health", "links": [{"x": 84.939, "y": 7.238, "w": 10.946, "h": 2.782, "href": "https://www.getpeakhealth.com/", "label": "Visit getpeakhealth.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-11.webp", "title": "Henry", "links": [{"x": 91.502, "y": 7.238, "w": 4.384, "h": 2.782, "href": "https://www.henry.ai/", "label": "Visit henry.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-12.webp", "title": "Avera", "links": [{"x": 89.309, "y": 7.238, "w": 6.576, "h": 2.782, "href": "https://www.averalabs.ai/", "label": "Visit averalabs.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-13.webp", "title": "Global Citizens", "links": [{"x": 86.945, "y": 7.238, "w": 8.941, "h": 2.782, "href": "https://globalcitizens.ai/", "label": "Visit globalcitizens.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-14.webp", "title": "Stratus", "links": [{"x": 87.229, "y": 7.238, "w": 8.656, "h": 2.782, "href": "https://www.usestratus.com/", "label": "Visit usestratus.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-15.webp", "title": "OneImaging", "links": [{"x": 86.419, "y": 7.238, "w": 9.467, "h": 2.782, "href": "https://www.oneimaging.com/", "label": "Visit oneimaging.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-16.webp", "title": "Artemis", "links": [{"x": 85.352, "y": 7.238, "w": 10.533, "h": 2.782, "href": "https://artemispower.com/", "label": "Visit artemispower.com"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-17.webp", "title": "Revin", "links": [{"x": 91.895, "y": 7.238, "w": 3.991, "h": 2.782, "href": "https://www.revin.ai/", "label": "Visit revin.ai"}, {"x": 4.167, "y": 80.463, "w": 3.75, "h": 2.315, "page": 18, "label": "Go to page 18: Contact"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}, {"src": "assets/branding/page-18.webp", "title": "Contact", "links": [{"x": 19.792, "y": 55.572, "w": 12.863, "h": 2.782, "href": "https://linkedin.com/in/jaballer", "label": "Open Joshua Baller on LinkedIn"}, {"x": 4.167, "y": 47.13, "w": 5.365, "h": 2.315, "page": 10, "label": "Go to page 10: Peak Health"}, {"x": 4.167, "y": 76.296, "w": 2.448, "h": 2.315, "page": 17, "label": "Go to page 17: Revin"}, {"x": 4.167, "y": 42.963, "w": 5.573, "h": 2.315, "page": 9, "label": "Go to page 9: Renumerate"}, {"x": 4.167, "y": 72.13, "w": 3.594, "h": 2.315, "page": 16, "label": "Go to page 16: Artemis"}, {"x": 4.167, "y": 38.796, "w": 3.75, "h": 2.315, "page": 8, "label": "Go to page 8: Conway"}, {"x": 4.167, "y": 67.963, "w": 5.677, "h": 2.315, "page": 15, "label": "Go to page 15: OneImaging"}, {"x": 4.167, "y": 34.63, "w": 4.219, "h": 2.315, "page": 7, "label": "Go to page 7: Autopilot"}, {"x": 4.167, "y": 63.796, "w": 3.229, "h": 2.315, "page": 14, "label": "Go to page 14: Stratus"}, {"x": 4.167, "y": 30.463, "w": 3.281, "h": 2.315, "page": 6, "label": "Go to page 6: Crosby"}, {"x": 4.167, "y": 59.63, "w": 6.771, "h": 2.315, "page": 13, "label": "Go to page 13: Global Citizens"}, {"x": 4.167, "y": 26.296, "w": 7.187, "h": 2.315, "page": 5, "label": "Go to page 5: Different Health"}, {"x": 4.167, "y": 55.463, "w": 2.604, "h": 2.315, "page": 12, "label": "Go to page 12: Avera"}, {"x": 4.167, "y": 51.296, "w": 2.76, "h": 2.315, "page": 11, "label": "Go to page 11: Henry"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 17.963, "w": 5.99, "h": 2.315, "page": 3, "label": "Go to page 3: About"}, {"x": 4.167, "y": 12.093, "w": 3.385, "h": 2.685, "page": 2, "label": "Go to page 2: Index"}, {"x": 4.167, "y": 21.825, "w": 5.306, "h": 2.315, "page": 4, "label": "Go to page 4: Psychecare"}]}]}};
+    var HASHES = { '#branding': 'branding', '#case-study': 'case-study', '#presentations': 'presentation' };
+    var dlg = document.getElementById('flipbook'), stage = document.getElementById('fb-stage'),
+        underImg = document.getElementById('fb-under-img'), leaf = document.getElementById('fb-leaf'),
+        leafImg = document.getElementById('fb-leaf-img'), shadow = document.getElementById('fb-shadow'),
+        linksEl = document.getElementById('fb-links'), dotsEl = document.getElementById('fb-dots'),
+        numEl = document.getElementById('fb-num'), totalEl = document.getElementById('fb-total'),
+        sectionEl = document.getElementById('fb-section'), prevBtn = document.getElementById('fb-prev'),
+        nextBtn = document.getElementById('fb-next'), titleMain = document.getElementById('fb-title-main'),
+        titleSub = document.getElementById('fb-title-sub');
+    var key = null, PAGES = [], cur = 0, busy = false, opener = null, caches = {};
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+
+    function ensure(k, i) {
+      var pages = BOOKS[k].pages;
+      if (i < 0 || i >= pages.length) return Promise.resolve();
+      var c = caches[k] || (caches[k] = {});
+      return c[i] || (c[i] = new Promise(function (res) {
+        var im = new Image(); im.onload = im.onerror = function () { res(); }; im.src = pages[i].src;
+      }));
+    }
+    function alt(i) { return 'Page ' + (i + 1) + ' of ' + PAGES.length + ': ' + PAGES[i].title; }
+    function renderLinks(i) {
+      linksEl.replaceChildren();
+      PAGES[i].links.forEach(function (l) {
+        var a = document.createElement('a');
+        a.style.cssText = 'left:' + l.x + '%;top:' + l.y + '%;width:' + l.w + '%;height:' + l.h + '%';
+        if (l.page) {
+          // jump link inside the document (sidebar menu, index). The page bar already gives keyboard users the same jumps.
+          a.href = '#page-' + l.page; a.title = l.label; a.tabIndex = -1; a.setAttribute('aria-hidden', 'true');
+          a.addEventListener('click', function (e) { e.preventDefault(); go(l.page - 1); });
+        } else {
+          a.href = l.href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', l.label + ' (opens in a new tab)');
+        }
+        linksEl.appendChild(a);
+      });
+    }
+    function updateUI() {
+      numEl.textContent = pad(cur + 1);
+      sectionEl.textContent = PAGES[cur].title;
+      prevBtn.disabled = cur === 0; nextBtn.disabled = cur === PAGES.length - 1;
+      Array.prototype.forEach.call(dotsEl.children, function (b, i) {
+        if (i === cur) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+      });
+    }
+    function show(i) {
+      cur = i; underImg.src = PAGES[i].src; underImg.alt = alt(i);
+      leaf.hidden = true; shadow.style.opacity = 0;
+      renderLinks(i); updateUI(); ensure(key, i + 1); ensure(key, i - 1);
+    }
+    function go(to) {
+      if (busy || to === cur || to < 0 || to >= PAGES.length) return;
+      hideTip();
+      var from = cur, fwd = to > from;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !leaf.animate) { show(to); return; }
+      busy = true;
+      Promise.all([ensure(key, to), ensure(key, from)]).then(function () {
+        // the page that stays put sits underneath; the other one is the leaf that turns about the left edge
+        underImg.src = PAGES[fwd ? to : from].src; leafImg.src = PAGES[fwd ? from : to].src;
+        linksEl.replaceChildren(); leaf.hidden = false;
+        var turn = [{ transform: 'rotateY(0deg)', filter: 'brightness(1)' }, { transform: 'rotateY(-96deg)', filter: 'brightness(0.7)' }];
+        var o = { duration: 720, easing: 'cubic-bezier(.6,.05,.25,1)', fill: 'both' };
+        var a = leaf.animate(fwd ? turn : turn.slice().reverse(), o);
+        var sa = shadow.animate(fwd ? [{ opacity: 1 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 1 }], o);
+        cur = to; updateUI();
+        // release the held end frames (fill: both) so the shading never lingers on the page
+        a.finished.then(function () { a.cancel(); sa.cancel(); show(to); busy = false; }, function () { busy = false; });
+      });
+    }
+
+    function buildDots() {
+      dotsEl.replaceChildren();
+      PAGES.forEach(function (p, i) {
+        var b = document.createElement('button'); b.type = 'button';
+        b.title = pad(i + 1) + ' · ' + p.title; b.setAttribute('aria-label', 'Go to page ' + (i + 1) + ': ' + p.title);
+        b.addEventListener('click', function () { go(i); }); dotsEl.appendChild(b);
+      });
+    }
+    prevBtn.addEventListener('click', function () { go(cur - 1); });
+    nextBtn.addEventListener('click', function () { go(cur + 1); });
+
+    function openBook(from, k) {
+      if (!BOOKS[k]) return;
+      key = k; PAGES = BOOKS[k].pages; busy = false;
+      opener = from && from.tabIndex >= 0 ? from : (from && from.closest('.card') ? from.closest('.card').querySelector('.more') : null);
+      titleMain.textContent = BOOKS[k].title; titleSub.textContent = BOOKS[k].sub;
+      dlg.setAttribute('aria-label', BOOKS[k].label);
+      totalEl.textContent = pad(PAGES.length); buildDots();
+      document.documentElement.style.overflow = 'hidden';
+      show(0);
+      if (!dlg.open) {
+        try { dlg.showModal(); } catch (err) { dlg.setAttribute('open', ''); }
+      }
+      nextBtn.focus({ preventScroll: true });
+      showTip();
+    }
+    function closeBook() { dlg.close(); }
+    dlg.addEventListener('close', function () {
+      hideTip(); document.documentElement.style.overflow = '';
+      if (opener) opener.focus({ preventScroll: true });
+    });
+    document.getElementById('fb-close').addEventListener('click', closeBook);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.id === 'fb-wrap') closeBook(); });
+    dlg.addEventListener('keydown', function (e) {
+      var k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown') { e.preventDefault(); go(cur + 1); }
+      else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(cur - 1); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(PAGES.length - 1); }
+    });
+
+    // Scroll wheel / trackpad: one page per scroll gesture.
+    // Trackpads send dozens of small events (plus a long inertia tail), so deltas are summed, a page turns once the
+    // sum passes a threshold, and further events are ignored until the scrolling pauses.
+    var wAcc = 0, wLast = 0, wLocked = false;
+    dlg.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) return;                         // pinch-zoom on a trackpad: leave it to the browser
+      e.preventDefault();
+      var now = performance.now();
+      var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;   // sideways two-finger swipes count too
+      if (e.deltaMode === 1) d *= 16; else if (e.deltaMode === 2) d *= 400;
+      if (now - wLast > 160) { wAcc = 0; wLocked = false; }                     // a pause ends the previous gesture
+      wLast = now;
+      if (wLocked || busy) return;
+      wAcc += d;
+      if (Math.abs(wAcc) >= 40) { var dir = wAcc > 0 ? 1 : -1; wAcc = 0; wLocked = true; go(cur + dir); }
+    }, { passive: false });
+
+    // brief hint the first time the viewer opens (mouse users only, hidden on touch via CSS)
+    var tip = document.getElementById('fb-tip'), tipShown = false, tipTimer = 0;
+    function showTip() { if (tipShown) return; tipShown = true; tip.classList.add('on'); tipTimer = setTimeout(hideTip, 4200); }
+    function hideTip() { clearTimeout(tipTimer); tip.classList.remove('on'); }
+
+    // swipe to turn
+    var sx = 0, sy = 0;
+    stage.addEventListener('pointerdown', function (e) { sx = e.clientX; sy = e.clientY; });
+    stage.addEventListener('pointerup', function (e) {
+      var dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? cur + 1 : cur - 1);
+    });
+
+    // Delegated in the capture phase so nothing else gets to treat these as ordinary links
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-flipbook]');
+      if (!a || e.button !== 0) return;
+      e.preventDefault(); e.stopImmediatePropagation(); openBook(a, a.getAttribute('data-flipbook'));
+    }, true);
+    document.querySelectorAll('[data-flipbook]').forEach(function (a) {
+      var k = a.getAttribute('data-flipbook');
+      ['pointerenter', 'focus'].forEach(function (t) { a.addEventListener(t, function () { ensure(k, 0); ensure(k, 1); }); });
+    });
+    // shareable deep links: #case-study and #presentations open the matching flipbook on load
+    if (HASHES[location.hash]) {
+      var t = document.querySelector('[data-flipbook="' + HASHES[location.hash] + '"].more');
+      openBook(t, HASHES[location.hash]);
+    }
+  })();
+  </script>
+</body>
+</html>
