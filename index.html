@@ -599,11 +599,30 @@
         try { dlg.showModal(); } catch (err) { dlg.setAttribute('open', ''); }
       }
       nextBtn.focus({ preventScroll: true });
-      showTip();
+      showTip(); enterFullscreen();
     }
+    // Touch devices: hide the browser chrome too. Needs the opening tap, so it quietly does nothing for deep links on load,
+    // and iPhone Safari has no fullscreen for page elements (the viewer still fills the whole viewport there).
+    var touchDevice = window.matchMedia('(pointer: coarse)');
+    function enterFullscreen() {
+      if (!touchDevice.matches || document.fullscreenElement || !dlg.requestFullscreen) return;
+      try {
+        var p = dlg.requestFullscreen({ navigationUI: 'hide' });
+        if (p && p.then) p.then(function () {
+          // Android: also lock to landscape; this replaces the turned-on-its-side fallback while it holds
+          if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').then(syncOrientation, function () {});
+        }, function () {});
+      } catch (err) {}
+    }
+    function leaveFullscreen() {
+      try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (err) {}
+      try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {}); } catch (err) {}
+    }
+    // leaving fullscreen with the system back gesture closes the viewer as well
+    document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement && dlg.open) dlg.close(); });
     function closeBook() { dlg.close(); }
     dlg.addEventListener('close', function () {
-      hideTip(); document.documentElement.style.overflow = '';
+      hideTip(); document.documentElement.style.overflow = ''; leaveFullscreen();
       if (opener) opener.focus({ preventScroll: true });
     });
     document.getElementById('fb-close').addEventListener('click', closeBook);
