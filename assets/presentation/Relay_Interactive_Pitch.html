@@ -452,6 +452,23 @@ stage.addEventListener('wheel', e => {
   }
 }, { passive: false });
 
+// touch: tap the right 3/5 of the screen for next, the left 2/5 for back (same as wheel down / up)
+const upright = window.matchMedia('(max-width:900px) and (orientation:portrait) and (pointer:coarse)');
+let tapStart = null;
+stage.addEventListener('pointerdown', e => {
+  tapStart = e.pointerType === 'touch' && e.isPrimary ? { x: e.clientX, y: e.clientY, t: Date.now() } : null;
+});
+stage.addEventListener('pointercancel', () => { tapStart = null; });
+stage.addEventListener('pointerup', e => {
+  const s = tapStart; tapStart = null;
+  if (!s || overview || !indexPanel.hidden) return;
+  if (Math.abs(e.clientX - s.x) > 12 || Math.abs(e.clientY - s.y) > 12 || Date.now() - s.t > 600) return;
+  if (e.target.closest && e.target.closest('a,button')) return;
+  // when the deck is turned sideways on an upright phone, the deck's left-to-right runs top-to-bottom on the screen
+  const f = upright.matches ? e.clientY / window.innerHeight : e.clientX / window.innerWidth;
+  f < 0.4 ? prev() : next();
+});
+
 // links inside slides behave normally (no click-to-advance anywhere)
 // ---------- init ----------
 applyRM();
