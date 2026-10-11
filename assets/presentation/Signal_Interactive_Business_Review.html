@@ -86,6 +86,12 @@ body.overview .ovlabel{font-size:13px;color:var(--ui-mute);margin:0 auto 6px;fon
 .ovlabel{display:none}
 body.overview .ovlabel{display:block}
 @media (max-width:900px){#deckname{display:none}.lbl{display:none}#status{min-width:0}}
+/* phones held upright: turn the deck sideways so slides fill the screen (landscape by default) */
+@media (max-width:900px) and (orientation:portrait) and (pointer:coarse){
+  html{overflow:hidden}
+  body{position:fixed;top:0;left:0;width:100vh;height:100vw;width:100dvh;height:100dvw;transform-origin:0 0;transform:translateX(100vw) rotate(90deg);transform:translateX(100dvw) rotate(90deg)}
+  #index{max-height:calc(100vw - var(--bar-h) - 30px);max-height:calc(100dvw - var(--bar-h) - 30px)}
+}
 @media print{
   @page{size:1920px 1080px;margin:0}
   html,body{background:#fff!important;height:auto;overflow:visible}
@@ -298,8 +304,7 @@ function update() {
 }
 function fit() {
   if (overview) { fitOverview(); return; }
-  const r = stage.getBoundingClientRect();
-  const s = Math.min(r.width / 1920, r.height / 1080);
+  const s = Math.min(stage.clientWidth / 1920, stage.clientHeight / 1080);
   scaler.style.transform = 'scale(' + s + ') translate(-50%,-50%)';
   scaler.style.transformOrigin = '0 0';
   scaler.style.transform = 'translate(' + (-960 * s) + 'px,' + (-540 * s) + 'px) scale(' + s + ')';
@@ -331,7 +336,7 @@ document.getElementById('btnRestart').addEventListener('click', restart);
 const btnFull = document.getElementById('btnFull');
 function toggleFull() {
   if (document.fullscreenElement) document.exitFullscreen && document.exitFullscreen();
-  else if (root.requestFullscreen) root.requestFullscreen().catch(() => {});
+  else if (root.requestFullscreen) root.requestFullscreen().then(() => { try { screen.orientation.lock("landscape").catch(() => {}); } catch (e) {} }).catch(() => {});
 }
 btnFull.addEventListener('click', toggleFull);
 
@@ -376,7 +381,7 @@ function toggleOverview(on) {
   update();
 }
 function fitOverview() {
-  const w = Math.min(window.innerWidth - 48, 1600);
+  const w = Math.min(document.body.clientWidth - 48, 1600);
   const s = w / 1920;
   ovWraps.forEach(([wrap, lab]) => {
     wrap.style.width = w + 'px'; wrap.style.height = (1080 * s) + 'px';
